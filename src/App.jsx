@@ -4,33 +4,54 @@ import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
 
 const App = () => {
-  // TODO: Implement state for dark mode toggle
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
-  // TODO: Implement state for cart management
+  const [cartItems, setCartItems] = useState([])
 
-  // TODO: Implement state for category filtering
+  const [category, setCategory] = useState('All')
+
+  const handleAddToCart = (product) => {
+    setCartItems([...cartItems, product])
+  }
 
   return (
-    <div>
-      <h1>🛒 Shopping App</h1>
+    <div style={{
+      backgroundColor: isDarkMode ? '#222222' : '#ffffff',
+      color: isDarkMode ? '#ffffff' : '#000000',
+      minHeight: '100vh',
+      padding: '20px',
+      fontFamily: 'sans-serif',
+      transition: 'background-color 0.3s ease, color 0.3s ease'
+    }}>
+      <h1>Shopping App</h1>
       <p>
         Welcome! Your task is to implement filtering, cart management, and dark
         mode.
       </p>
 
-      {/* TODO: Render DarkModeToggle and implement dark mode functionality */}
+      <DarkModeToggle 
+        isDarkMode={isDarkMode} 
+        onToggle={() => setIsDarkMode(!isDarkMode)} 
+      />
 
-      {/* TODO: Implement category filter dropdown */}
-      <label>Filter by Category: </label>
-      <select>
-        <option value="all">All</option>
+      <label htmlFor="category-select">Filter by Category: </label>
+      <select 
+        id="category-select"
+        value={category} 
+        onChange={(e) => setCategory(e.target.value)}
+        style={{ padding: '6px', borderRadius: '4px', cursor: 'pointer' }}
+      >
+        <option value="All">All</option>
         <option value="Fruits">Fruits</option>
         <option value="Dairy">Dairy</option>
       </select>
 
-      <ProductList />
+      <ProductList 
+        selectedCategory={category} 
+        onAddToCart={handleAddToCart} 
+      />
 
-      {/* TODO: Implement and render Cart component */}
+      <Cart cartItems={cartItems} />
     </div>
   )
 }
