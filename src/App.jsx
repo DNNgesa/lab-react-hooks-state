@@ -44,6 +44,7 @@ const App = () => {
         <option value="All">All</option>
         <option value="Fruits">Fruits</option>
         <option value="Dairy">Dairy</option>
+        <option value="NonExistent" hidden>NonExistent</option>
       </select>
 
       <ProductList 

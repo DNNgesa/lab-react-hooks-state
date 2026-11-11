@@ -9,8 +9,8 @@ export const sampleProducts = [
 const ProductList = ({ selectedCategory, onAddToCart }) => {
   
   const filteredProducts = sampleProducts.filter((product) => {
-    if (!selectedCategory || selectedCategory === 'All') return true;
-    return product.category === selectedCategory;
+    if (!selectedCategory || selectedCategory.toLowerCase() === 'all') return true;
+    return product.category.toLowerCase() === selectedCategory.toLowerCase();
   });
 
   if (filteredProducts.length === 0) {
